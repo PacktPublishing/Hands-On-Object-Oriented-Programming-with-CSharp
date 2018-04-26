@@ -177,3 +177,21 @@ namespace ExceptionCode
 }
 
 ```
+
+1. Closest matching catch statement is checked
+2. You should check the catch as early as possible otherwise the stack trace will be huge.
+3. Custom exceptions for special cases and more precise
+
+### Why we need exception
+
+### How to handle exception using try and catch
+
+### Multiple catch blocks
+
+### General catch block
+
+### Finally block; What does that do
+
+### Wy we want to throw exceptions
+
+### Exception Handling Best Practices
