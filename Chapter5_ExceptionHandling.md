@@ -178,6 +178,8 @@ namespace ExceptionCode
 
 ```
 
+So if you want or need to throw an exception because may be you want the upper layer catch block to handle it. You simple throw a new instance of an exception. This could be any kind of exception. It could be a system exception, it could be a self created exception. Just keep in mind that there is some catch block which will handle it.
+
 1. Closest matching catch statement is checked
 2. You should check the catch as early as possible otherwise the stack trace will be huge.
 3. Custom exceptions for special cases and more precise
@@ -192,6 +194,106 @@ namespace ExceptionCode
 
 ### Finally block; What does that do
 
+When we say "Finally", we mean something that we where waiting for or something that is going conclude the process. Its almost same in exception handling. A "Finally" block is a block of code, which will be executed no matter what happens to the try or catch block. It doesn't matter what type of exceptions were thrown or wheter those were handled or not, the finally block will get executed. Now you may ask why do we need this finally block? If there is any exception in our program, we are handling it by the catch block! Can't we write the code there instead of finally block? Yes, you can but what happens if there was exception thrown, the catch block will not be triggered. It means the code inside the catch block will not get executed. That is why finally block is important. It doesn't matter if there was any exception or not, the finally block will run. Let me show you can example fo finally block:
+
+```csharp
+using System;
+
+namespace ExceptionCode
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+
+
+			try
+			{
+				int a = 0;
+				int b = 5;
+				int c = b / a;
+			}
+			catch (IndexOutOfRangeException ex)
+			{
+				Console.WriteLine("Index out of range " + ex);
+			}
+			catch (DivideByZeroException ex)
+			{
+				Console.WriteLine("Divide by zero " + ex);
+			}
+			catch
+			{
+				Console.WriteLine("I will catch you exception! You can't hide from me!");
+			}
+
+			finally
+			{
+				Console.WriteLine("I am the finally block i will run by hook or by crook!");
+			}
+		}
+	}
+}
+
+```
+
+An important use case of finally block could be when you open a database connection in the try block! You have to close it otherwise that connection will be open for the rest of the program and it will take a lot of resources. And not only that there are limited number of connections a database can make, so if you open one and don't close it, that connection string is wasted. So the best practice is to close the connection as soon as your work with the connection is complete. And finally block plays the best role here. It doesn't matter what will happen in try block, the finally block will close the connection.
+
+```csharp
+using System;
+
+namespace ExceptionCode
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+
+
+			try
+			{
+				// Step 1: Established database connection
+				// Step 2: Do some activity in database
+			}
+			catch (IndexOutOfRangeException ex)
+			{
+				// Handle IndexOutOfRangeExceptions here
+			}
+			catch (DivideByZeroException ex)
+			{
+				// Handle DivideByZeroException here
+			}
+			catch
+			{
+				// Handle All other exception here
+			}
+
+			finally
+			{
+				// Close the database connection
+            }
+
+        }
+    }
+}
+
+```
+
+Finally block is not something that you must have to have to handle exceptions. But use it if you need it.
+
 ### Wy we want to throw exceptions
 
 ### Exception Handling Best Practices
+
+As you can see there are different ways you can handle exceptions. Sometimes you can throw exceptions, sometimes you can use finally block, sometimes multiple catch blocks. So there is chance to get confused at the beginning if you don't have enough experience in it. But thanks to the C# community, they have shared the best practices of Exception Handling with the world. Let go throw on some of them.
+
+1. Use finally block to close/cleanup the dependent resources that could cause problem in the future.
+
+2. Catch specific exception and handle it properly. Use multiple catch blocks if needed.
+
+3. Create your own exceptions if needed and use it.
+
+4. Handle exceptions as soon as possible.
+
+5. Don't use general exception handler if you can handle using specific handler.
+
+6. The exceptions messages should be very clear.
