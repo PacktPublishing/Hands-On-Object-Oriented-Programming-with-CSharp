@@ -292,6 +292,30 @@ Finally block is not something that you must have to have to handle exceptions. 
 
 ### Wy we want to throw exceptions
 
+### Exception Class
+
+Exception is noting but a class in c#. It has few properties and few methods. The main three properties are
+
+- Message: This contains what is the exception about.
+- StackTrace: This contains the method call stack information.
+- TargetSite: This gives an object which contains the method where the exception happened.
+- InnerException: This gives the instance of the exception which caused the exception.
+
+One of the most popular method that this class has in **ToString()**. This method returns a string which contains information about the exception. Its easier to read and understand when it is represented in string format.
+
+/// Example code goes here
+
+### Some common exception classes
+
+There are many exception classes available in .NET Framework. .NET Framework created those to make the developers life easy. Its provides specific information about the exceptions. Below some of the most common exception classes are shared.
+
+- DivideByZeroException: This exception is thrown when any number is divided by zero.
+- IndexOutOfRangeException: This exception is thrown when the application tries to use an index of an array which doesn't exist.
+- InvalidCastException: This exception is thrown when trying to do some not valid casting.
+- NullReferenceException: This exception is thrown when trying to use or access a null reference type.
+
+/// NullRefException example
+
 ### Exception Handling Best Practices
 
 As you can see there are different ways you can handle exceptions. Sometimes you can throw exceptions, sometimes you can use finally block, sometimes multiple catch blocks. So there is chance to get confused at the beginning if you don't have enough experience in it. But thanks to the C# community, they have shared the best practices of Exception Handling with the world. Let go throw on some of them.
