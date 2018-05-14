@@ -131,6 +131,51 @@ Here we can see instead of passing the method name in the constructor, we are di
 
 ## Using static and instance method as delegates
 
+In the previous examples we have used static methods in delegate. But you can also use Instance methods in delegate. Lets see an example:
+
+```csharp
+using System;
+
+namespace Delegate1
+{
+    delegate int MathFunc(int a, int b);
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            MyMath mc = new MyMath();
+            MathFunc mf = mc.add;
+
+            Console.WriteLine("add");
+            Console.WriteLine(mf(4, 5));
+
+            mf = mc.sub;
+
+            Console.WriteLine("sub");
+            Console.WriteLine(mf(4, 5));
+            Console.ReadKey();
+        }
+    }
+
+	class MyMath
+	{
+		public int add(int a, int b)
+		{
+			return a + b;
+		}
+
+		public int sub(int a, int b)
+		{
+			return (a > b) ? (a - b) : (b - a);
+		}
+	}
+}
+
+```
+
+So in the above example we can see that we have instance methods under **MyMath** class and to use those methods in delegate, we have to first create an object of that class and simply assign the methods to a delegate using the object instance.
+
 ## Multicasting
 
 ## Covariance and Contravariance
