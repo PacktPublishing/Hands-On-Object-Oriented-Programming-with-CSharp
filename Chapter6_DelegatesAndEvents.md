@@ -17,7 +17,7 @@ Suppose I have 3 programmers in my group. Every one is an expert in different pr
 To create a delegate we need to use the keyword "delegate". Let me show you how to declare a delegate in a general form:
 
 ```csharp
-    delegate return-type name(parameters)
+delegate return-type name(parameters)
 ```
 
 now let me show you a real example code:
@@ -62,16 +62,16 @@ namespace Delegate1
 Output:
 
 ```bash
-    add
-    9
-    sub
-    1
+add
+9
+sub
+1
 ```
 
 Now lets discuss about this code. At the very top inside the namespace we can see the declaration of the delegate.
 
 ```csharp
-    delegate int MathFunc(int a, int b);
+delegate int MathFunc(int a, int b);
 ```
 
 We used the keyword "delegate" to let the compiler know that we are declaring a delegate. Then we are setting the return type to "int" and name the delegate "MathFunc". We have also set two parameters for this delegate and those are int type.
