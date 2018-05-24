@@ -158,18 +158,18 @@ namespace Delegate1
         }
     }
 
-	class MyMath
-	{
-		public int add(int a, int b)
-		{
-			return a + b;
-		}
+    class MyMath
+    {
+        public int add(int a, int b)
+        {
+            return a + b;
+        }
 
-		public int sub(int a, int b)
-		{
-			return (a > b) ? (a - b) : (b - a);
-		}
-	}
+        public int sub(int a, int b)
+        {
+            return (a > b) ? (a - b) : (b - a);
+        }
+    }
 }
 
 ```
@@ -178,6 +178,253 @@ So in the above example we can see that we have instance methods under **MyMath*
 
 ## Multicasting
 
+Multicasting is an excellent feature of Delegate. In multicasting you can assign more then 1 method to a delegate and when that delegate gets executed, it runs those methods one after another. Using + or += operator you can add methods to a delegate. There is also a way to remove the added methods from the delegate. And to do that you have to use the - or -= operator. Lets see an example to understand clearly what is Multicasting.
+
+```csharp
+using System;
+
+namespace MyDelegate
+{
+	delegate void MathFunc(ref int a);
+
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			MathFunc mf;
+			MathFunc myAdd = MyMath.add5;
+			MathFunc mySub = MyMath.sub3;
+
+			mf = myAdd;
+			mf += mySub;
+			int number = 10;
+
+			mf(ref number);
+
+			Console.WriteLine($"Final number: {number}");
+			
+			Console.ReadKey();
+		}
+	}
+
+	class MyMath
+	{
+		public static void add5(ref int a)
+		{
+			a = a + 5;
+			Console.WriteLine($"After adding 5 the answer is {a}");
+		}
+
+		public static void sub3(ref int a)
+		{
+			a = a -3;
+			Console.WriteLine($"After subtracting 3 the answer is {a}");
+		}
+	}
+}
+```
+
+Output:
+
+```shell
+After adding 5 the answer is 15
+After subtracting 3 the answer is 12
+Final number: 12
+```
+
+Here we can see how our delegate executed 2 methods one after another. Here we have to keep in mind that, it works like queue, so the first method you will add, will the first method to get executed. Now lets see how we can remove a method from a delegate.
+
+```csharp
+using System;
+
+namespace MyDelegate
+{
+	delegate void MathFunc(ref int a);
+
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			MathFunc mf;
+			MathFunc myAdd = MyMath.add5;
+			MathFunc mySub = MyMath.sub3;
+			MathFunc myMul = MyMath.mul10;
+
+			mf = myAdd;
+			mf += mySub;
+		
+			int number = 10;
+
+			mf(ref number);
+
+			mf -= mySub;
+			mf += myMul;
+
+			number = 10;
+
+			mf(ref number);
+
+
+			Console.WriteLine($"Final number: {number}");
+			
+			Console.ReadKey();
+		}
+	}
+
+	class MyMath
+	{
+		public static void add5(ref int a)
+		{
+			a = a + 5;
+			Console.WriteLine($"After adding 5 the answer is {a}");
+		}
+
+		public static void sub3(ref int a)
+		{
+			a = a -3;
+			Console.WriteLine($"After subtracting 3 the answer is {a}");
+		}
+
+		public static void mul10(ref int a)
+		{
+			a = a * 10;
+			Console.WriteLine($"After multiplying 10 the answer is {a}");
+		}
+	}
+}
+```
+
+Output:
+
+```shell
+After adding 5 the answer is 15
+After subtracting 3 the answer is 12
+After adding 5 the answer is 15
+After multiplying 10 the answer is 150
+Final number: 150
+```
+
+So here we can see that first we added two methods in the delegate. Then we removed the sub3 method and added mul10 method. After all these when we executed the delegate, we saw that 5 was added with the number then 10 was multiplied with the number. No subtraction took place.
+
 ## Covariance and Contravariance
 
+There are two important features of delegate. Normally what we have learnt so far is, a method to pass in a delegate the method has to match the return type and the parameters. But with converiance and contraveriance you can actually pass methods to a delegate which don't have same return types or parameters and the delegate will be able to execute it. Isn't it interesting. Coveriance is when you assign a method to a delegate which's return type is a derived type of the return type of the delegate. For example if class A is derived from class B and if a delegate returns class B, then a method can be assinged to the delegate even if it returns class A. This is called Coveriance.
+
+On the other hand Contravariance is when a method is passed to a delegate and the parameters of a method doesn't match parameters of the delegate. Here we have to keep in mind that the parameter type of the method has to be atleast derieved from parameter type of the delegate. Now lets see an example of Coveriance & Contravariance:
+
+
+```csharp
+
+```
+
 ## Why delegates?
+
+Delegates are needed mainly for events. When an even triggers, a delegate normally gets activated and do some work.
+
+## Events
+
+Events are something like methods which gets executed on some circumstances and notifies some handlers or delegates about that incident. If i give you a real life example: when you sign in for an email newsletter, you get emails from the website about the latest articles, blog posts or news that are posted recently. It could be daily, weekly, monthly, yearly doesn't matter, the point is, when you opt in, they will notify you by email. And yes its not sent my a human being to manually but its automatic by implementing events in the application. Now you might think, why i need an event for it, can't i send email to the subscriber by a method? Yes, you can but, suppose in the near future you want to also introduce a feature where you will notify on the mobile app, then you have to change the code and add the functionality. And after few days, if you want to send sms to certain subsribers, you have to add it again. And the code will be very much coupled if you do it using normal methods. To solve this kind of problems events are introduced actually. You can create different event handlers and assign to the event, so that when ever the event gets fire, it will notify all the registered handlers. Lets now see an example to make our understanding super clear:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EventsAndDelegates
+{
+	public delegate void GetResult();
+
+	public class ResultPublishEvent
+	{
+		public event GetResult PublishResult;
+
+		public void PublishResultNow()
+		{
+			if (PublishResult != null)
+			{
+				Console.WriteLine("We are publishing the results now!");
+				Console.WriteLine("");
+				PublishResult();
+			}
+		}
+	}
+
+	public class PostEventHandler
+	{
+		public void SendLetter()
+		{
+			Console.WriteLine("Results have been posted in the mailbox successfully!!");
+		}
+	}
+
+	public class EmailEventHandler
+	{
+		public void SendEmail()
+		{
+			Console.WriteLine("Results have been emailed successfully!");
+		}
+	}
+
+	public class SmsEventHandler
+	{
+		public void SmsSender()
+		{
+			Console.WriteLine("Results have been messaged successfully!");
+		}
+	}
+
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			ResultPublishEvent e = new ResultPublishEvent();
+
+			//Handlers
+			EmailEventHandler email = new EmailEventHandler();
+			SmsEventHandler sms = new SmsEventHandler();
+			PostEventHandler post = new PostEventHandler();
+
+			e.PublishResult += email.SendEmail;
+			e.PublishResult += sms.SmsSender;
+			e.PublishResult += post.SendLetter;
+
+			e.PublishResultNow();
+
+			Console.ReadLine();
+		}
+	}
+}
+
+```
+
+Output:
+
+```shell
+We are publishing the results now!
+
+Results have been emailed successfully!
+Results have been messaged successfully!
+Results have been posted in the mailbox successfully!!
+```
+
+If we analyze the above code, we will see that first we have declared a delegate, which returns void and has no parameter
+
+```csharp
+public delegate void GetResult();
+```
+
+Then we have created a class named **ResultPublishEvent** and inside it we have created an event.
+
+```csharp
+public event GetResult PublishResult;
+```
+
+this is how you have to create an event. First access modifier then the keyword **event** to let the compiler know that this is an event we are declaring. Then the delegate name, which type of delegates can be registered as a handler. Then the name of the event.
+
+In the same class we also created a method named **PublishResultNow**. This is just to trigger/fire the event. If you see in the method, we have checked if the event is null or not. And only if not null, then we fire the event. The reason behind doing this is, we don't want an event to get fired before no handlers has registered for it.
+
+Then we have 3 classes which has 1 method each. The 3 of the classes are just simulation of different event handlers. Here the emailHandler is representing emailing to the subscriber, SmsClient is representing messaging the customers and PostHandler is represting sending physical letters to the subscriber.
+
+Then in the main method we can see, we have created an instance of the event class and assigned all 3 handler objects to the event using += sign. Then when the ResultPublishEvent methods is instantiated, it fired the event. And when the event gets fired, it notifies all the handlers which registerd for this event.

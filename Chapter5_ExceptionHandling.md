@@ -316,6 +316,98 @@ There are many exception classes available in .NET Framework. .NET Framework cre
 
 /// NullRefException example
 
+### User defined Exception
+
+Sometimes there might be case where you think the pre-defined exceptions are not statisfying your condition. You might wish there could be a way where you can create your own exception and use it. Using something you created will surly make you more happy. Anyways, in C# there is actually a machanism that you an create your own custom exceptions. You can put what message is appropriate for that kind of exception. Lets see an example how to create and use custom exception below:
+
+```csharp
+using System;
+
+namespace ExceptionCode
+{
+
+	class HelloException : Exception
+	{
+		public HelloException() { }
+		public HelloException(string message) : base(message) { }
+		public HelloException(string message, Exception inner) : base(message, inner) { }
+	}
+
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			
+			try
+			{
+				throw new HelloException("Hello is an exception!");
+			}
+			catch (HelloException ex)
+			{
+				Console.WriteLine("Exception Message:");
+				Console.WriteLine(ex.Message);
+			}
+
+			Console.ReadKey();
+
+		}
+	}
+}
+```
+
+So we can see from the above example that you just have to create a class that will extend the Exception class. This class should have 3 constructors, one shouldn't take any parameter, one should take a string and pass it to base. Another constructor should take a string and an Exception and pass it to the base.
+
+Using a custom exception is like using any other built in exception provided .NET framework.
+
+### Exception Filter
+
+This feature isn't much old at the time I am writing this book. It was introduce in C# 6. The main benefit of this is you can catch more specific exception in a block. Lets see an example of Exception Filter:
+
+```csharp
+
+using System;
+
+namespace ExceptionCode
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+
+			int[] a = new int[] {1,2,3};
+
+			try
+			{
+				Console.WriteLine(a[5]);
+			}
+			catch (IndexOutOfRangeException ex) when (ex.Message == "Test Message")
+			{
+				Console.WriteLine("Message:");
+				Console.WriteLine("Test Message");
+			}
+			catch (IndexOutOfRangeException ex) when (ex.Message == "Index was outside the bounds of the array.")
+			{
+				Console.WriteLine("Message:");
+				Console.WriteLine(ex.Message);
+				Console.WriteLine("Stack Trace:");
+				Console.WriteLine(ex.StackTrace);
+				Console.WriteLine("String:");
+				Console.WriteLine(ex.ToString());
+			}
+
+			Console.ReadKey();
+
+		}
+	}
+}
+
+
+```
+
+To filter out exceptions you have to use the keyword "when" just next to the catch declaration line. So first any exception is thrown it will check what type of exception it is, in our example the exception type is "IndexOutOfRangeException" and then it will check what is the condition given in "when". The catch block which matches both the condition, will be executed.
+
+
+
 ### Exception Handling Best Practices
 
 As you can see there are different ways you can handle exceptions. Sometimes you can throw exceptions, sometimes you can use finally block, sometimes multiple catch blocks. So there is chance to get confused at the beginning if you don't have enough experience in it. But thanks to the C# community, they have shared the best practices of Exception Handling with the world. Let go throw on some of them.
