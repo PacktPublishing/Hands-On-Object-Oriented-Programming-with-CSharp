@@ -342,6 +342,182 @@ namespace EventsAndDelegates
 
 		public void PublishResultNow()
 		{
+
+			if (PublishResult != null)
+			{
+				Console.WriteLine("We are publishing the results now!");
+				Console.WriteLine("");
+				PublishResult();
+			}
+		}
+	}
+
+	public class EmailEventHandler
+	{
+		public void SendEmail()
+		{
+			Console.WriteLine("Results have been emailed successfully!");
+		}
+	}
+
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			ResultPublishEvent e = new ResultPublishEvent();
+
+			//Handlers
+			EmailEventHandler email = new EmailEventHandler();
+
+			e.PublishResult += email.SendEmail;
+
+			e.PublishResultNow();
+
+			Console.ReadLine();
+		}
+	}
+}
+
+```
+
+## Multicast Event
+
+You can multicast in an event same like we saw in delegate. It means, you can register multiple event-handlers to an event, and all of those will get executed one by one when the events get fired. To multicast, use the += sign to register event-handlers to the event. You can also remove event-handlers from the event by using the -= operator. When you apply multicast, the first event-handler that is register will get exectued first, then the second and so on. By using multicast you can easily extend or reduce event-handlers in your application without doing much work. Let's see an example of multicast:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EventsAndDelegates
+{
+	public delegate void GetResult();
+
+	public class ResultPublishEvent
+	{
+		public event GetResult PublishResult;
+
+		public void PublishResultNow()
+		{
+
+			if (PublishResult != null)
+			{
+				Console.WriteLine("");
+				Console.WriteLine("We are publishing the results now!");
+				Console.WriteLine("");
+				PublishResult();
+			}
+		}
+	}
+
+	public class EmailEventHandler
+	{
+		public void SendEmail()
+		{
+			Console.WriteLine("Results have been emailed successfully!");
+		}
+	}
+
+	public class SmsEventHandler
+	{
+		public void SmsSender()
+		{
+			Console.WriteLine("Results have been messaged successfully!");
+		}
+	}
+
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			ResultPublishEvent e = new ResultPublishEvent();
+
+			//Handlers
+			EmailEventHandler email = new EmailEventHandler();
+			SmsEventHandler sms = new SmsEventHandler();
+			
+			e.PublishResult += email.SendEmail;
+			e.PublishResult += sms.SmsSender;
+
+			e.PublishResultNow();
+
+			e.PublishResult -= sms.SmsSender;
+
+			e.PublishResultNow();
+
+			Console.ReadLine();
+		}
+	}
+}
+```
+
+Output:
+
+```shell
+
+We are publishing the results now!
+
+Results have been emailed successfully!
+Results have been messaged successfully!
+
+We are publishing the results now!
+
+Results have been emailed successfully!
+```
+
+Now if we analyze the above code we can see we have created another class **SmsEventHandler** and that class has a method **SmsSender**, which follows the same signature of our delegate **GetResult**.
+
+```csharp
+public class SmsEventHandler
+{
+    public void SmsSender()
+    {
+        Console.WriteLine("Results have been messaged successfully!");
+    }
+}
+```
+
+Then in the main method we have created an instance of this **SmsEventHandler** class and registered the **SmsSender** method to the event.
+
+```csharp
+e.PublishResult += sms.SmsSender;
+```
+
+After firing the event one time, we are removing the **SmsSender** event-handler from the event by the use of -= operator.
+
+```csharp
+e.PublishResult -= sms.SmsSender;
+```
+
+When we fire the event again, we can see in the output that just the email event-handler was executed.
+
+## Event Accessors
+
+
+
+## .NET Event Guidelines
+
+## Events case study
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EventsAndDelegates
+{
+	public delegate void GetResult();
+
+	public class ResultPublishEvent
+	{
+		public event GetResult PublishResult;
+
+		public void PublishResultNow()
+		{
 			if (PublishResult != null)
 			{
 				Console.WriteLine("We are publishing the results now!");
@@ -425,6 +601,8 @@ this is how you have to create an event. First access modifier then the keyword 
 
 In the same class we also created a method named **PublishResultNow**. This is just to trigger/fire the event. If you see in the method, we have checked if the event is null or not. And only if not null, then we fire the event. The reason behind doing this is, we don't want an event to get fired before no handlers has registered for it.
 
-Then we have 3 classes which has 1 method each. The 3 of the classes are just simulation of different event handlers. Here the emailHandler is representing emailing to the subscriber, SmsClient is representing messaging the customers and PostHandler is represting sending physical letters to the subscriber.
+Then we have 3 classes which has 1 method each. The 3 of the classes are just simulation of different event handlers. Here the emailHandler is representing emailing to the subscriber, SmsClient is representing messaging the customers and PostHandler is representing sending physical letters to the subscriber.
 
-Then in the main method we can see, we have created an instance of the event class and assigned all 3 handler objects to the event using += sign. Then when the ResultPublishEvent methods is instantiated, it fired the event. And when the event gets fired, it notifies all the handlers which registerd for this event.
+Then in the main method we can see, we have created an instance of the event class and assigned all 3 handler objects to the event using += sign. Then when the ResultPublishEvent methods is instantiated, it fired the event. And when the event gets fired, it notifies all the handlers which registered for this event.
+
+
