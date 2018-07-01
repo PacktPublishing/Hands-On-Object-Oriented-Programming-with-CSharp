@@ -1,13 +1,14 @@
-Using system;
+using System;
 
-class LearnException {
+class Chapter5
+{
     public static void Main()
     {
-        int[] a = {1,2,3,4};
+        int[] a = { 1, 2, 3, 4 };
 
-        for (int i=0; i<10; i++)
+        for (int i = 0; i < 10; i++)
         {
-            Console.Writeline(a[i]);
+            Console.WriteLine(a[i]);
         }
     }
 }
