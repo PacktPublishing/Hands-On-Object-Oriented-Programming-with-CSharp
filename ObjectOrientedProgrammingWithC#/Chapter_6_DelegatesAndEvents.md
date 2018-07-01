@@ -185,7 +185,7 @@ using System;
 
 namespace MyDelegate
 {
-	delegate void MathFunc(ref int a);
+    delegate void MathFunc(ref int a);
 
 	class Program
 	{
