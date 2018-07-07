@@ -56,7 +56,25 @@ Now let's see how this concept or OOP works. What are the building blocks of thi
 
 ## Class in OOP
 
-Classes are one of the most important concepts of OOP.
+Classes are one of the most important concepts of OOP. Classes are the basis of objects. A class is a blueprint of an object. In OOP you derive objects from classes. Now lets analyze what is a class actually.
+
+A class is template, its a skeleton which tells what properties it has and what things it can do. In normal circumstances A class itself can't do anything, it just helps creating objects from it.
+
+For example, Human can be catogorized as a class. As when we say Human, we don't mean any particular person, but we mean a kind of creature which has hands, feet, mouth etc and it can walk, talk, eat, think and so many other things. So by te properties and behaviour we are cetogizing or classinfying sometihng. And this classsificaion is named as class in programming.
+
+So we know human is a class and for simplycity lets just say, it has 3 properties.
+
+1. Hight
+2. Weight
+3. Age
+
+And also it can do 3 things:
+
+1. Walk
+2. Talk
+3. Eat
+
+So, if we want to have any human object in our software. We can create an object from this class and use it. When we wll create the object it would be a specific person. For example, myslef. I am Raihan and i am a human. I have all the properties and behaviours.
 
 ### General Form of a Class
 
