@@ -32,7 +32,7 @@ namespace Chapter6
         }
     }
 
-    public class Program
+    public class Code_6_7
     {
         public static void Main(string[] args)
         {

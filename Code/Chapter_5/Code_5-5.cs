@@ -2,7 +2,7 @@ using System;
 
 namespace Chapter5
 {
-    class ExceptionCode
+    class Code_5_5
     {
         static void Main(string[] args)
         {

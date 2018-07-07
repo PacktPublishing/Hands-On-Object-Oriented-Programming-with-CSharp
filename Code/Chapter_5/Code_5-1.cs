@@ -1,14 +1,17 @@
 using System;
 
-class Chapter5
+namespace Chapter5
 {
-    public static void Main()
+    class Code_5_1
     {
-        int[] a = { 1, 2, 3, 4 };
-
-        for (int i = 0; i < 10; i++)
+        public static void Main()
         {
-            Console.WriteLine(a[i]);
+            int[] a = { 1, 2, 3, 4 };
+
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(a[i]);
+            }
         }
     }
 }

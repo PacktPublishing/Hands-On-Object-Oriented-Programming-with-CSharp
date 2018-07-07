@@ -2,7 +2,7 @@ using System;
 
 namespace Chapter5
 {
-    class Program
+    class Code_5_4
     {
         static void Main(string[] args)
         {

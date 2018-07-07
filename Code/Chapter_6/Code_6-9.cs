@@ -47,7 +47,7 @@ namespace Chapter6
         }
     }
 
-    public class Program
+    public class Code_6_9
     {
         public static void Main(string[] args)
         {
