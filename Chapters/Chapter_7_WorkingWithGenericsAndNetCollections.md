@@ -11,14 +11,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericsLessions
+namespace Chapter7
 {
-	class Price<T>
-	{
-		T ob;
+    class Price<T>
+    {
+        T ob;
 
-		public Price(T o)
-		{
+        public Price(T o)
+        {
 			ob = o;
 		}
 
@@ -33,7 +33,7 @@ namespace GenericsLessions
 		}
 	}
 
-	class Program
+	class Code_7_1
 	{
 		static void Main(string[] args)
 		{
@@ -43,7 +43,7 @@ namespace GenericsLessions
 
 			int a = price.GetPrice();
 
-			Console.WriteLine("the price is " + a);
+			Console.WriteLine("The price is " + a);
 
 			Console.ReadKey();
 		}
@@ -59,9 +59,9 @@ The type is System.Int32
 the price is 55
 ```
 
-If you are totally new with the syntex of Generics, you might be very surprise to see the angle brackets <> next to the Price class. And also you might be wondering what is this "T" inside the <>. This is the syntex of Generics in C#. By putting the <> next to the class name we are telling the compiler that this is a generic class. And the T inside the <> is a type parameter. Yes, i know you are asking, now what is a type parameter? A type parameter is like any other parameter in C# programming except it passes a type instead of a value or reference. Now lets analyze the code we have written above.
+If you are totally new with the syntax of Generics, you might be very surprise to see the angle brackets <> next to the Price class. And also you might be wondering what is this "T" inside the <>. This is the syntax of Generics in C#. By putting the <> next to the class name we are telling the compiler that this is a generic class. And the T inside the <> is a type parameter. Yes, i know you are asking, now what is a type parameter? A type parameter is like any other parameter in C# programming except it passes a type instead of a value or reference. Now lets analyze the code we have written above.
 
-We created a generic class "Price" and to make it generic we placed <T> next to the class name. Here the T is a type parameter and its not something fixed that you have to use T to reperest the type parameter. You can use anything to represent it. But the normal convention or tradition is to use "T" for type parameter. And if there are more type parameters than V and E are used. There is another popular convention when using 2 or more parameter is to name the parameter like TValue and TKey instead just naming V and E to give a better readability. But as you see we prefixed T even before the word Value and Key, this is done to distinguish between type parameter and general parameter.
+We created a generic class "Price" and to make it generic we placed <T> next to the class name. Here the T is a type parameter and its not something fixed that you have to use T to represent the type parameter. You can use anything to represent it. But the normal convention or tradition is to use "T" for type parameter. And if there are more type parameters than V and E are used. There is another popular convention when using 2 or more parameter is to name the parameter like TValue and TKey instead just naming V and E to give a better readability. But as you see we prefixed T even before the word Value and Key, this is done to distinguish between type parameter and general parameter.
 
 Now in the class we first created a variable named "ob" which is a type of T:
 
