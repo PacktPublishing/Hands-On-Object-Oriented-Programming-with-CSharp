@@ -58,7 +58,7 @@ Now let's see how this concept or OOP works. What are the building blocks of thi
 
 Classes are one of the most important concepts of OOP. Classes are the basis of objects. A class is a blueprint of an object. In OOP you derive objects from classes. Now lets analyze what is a class actually.
 
-A class is template, its a skeleton which tells what properties it has and what things it can do. In normal circumstances A class itself can't do anything, it just helps creating objects from it.
+A class is a template, its a skeleton which tells what properties it has and what things it can do. In normal circumstances A class itself can't do anything, it just helps creating objects from it.
 
 For example, Human can be catogorized as a class. As when we say Human, we don't mean any particular person, but we mean a kind of creature which has hands, feet, mouth etc and it can walk, talk, eat, think and so many other things. So by te properties and behaviour we are cetogizing or classinfying sometihng. And this classsificaion is named as class in programming.
 
@@ -74,21 +74,117 @@ And also it can do 3 things:
 2. Talk
 3. Eat
 
-So, if we want to have any human object in our software. We can create an object from this class and use it. When we wll create the object it would be a specific person. For example, myslef. I am Raihan and i am a human. I have all the properties and behaviours.
-
 ### General Form of a Class
+
+To create a class in C#, you have to follow a particular syntax. The general form is:
+
+``` csharp
+class class-name {
+    // this is class body
+}
+```
+
+"class" is a reserved keyword in C# and its used to tell the compiler that we want to create a class. To create a class place the keyword "class" and then the name of the class after giving one space. The name of the class can be anything which starts with a character or underscore. Numbers also can be inside a class name.
 
 ### Let Us Write A Simple Class
 
+Now lets create our first class of this chapter. Let us imagine that we are developing a software an banking application. As we will be using C# and OOP for development, let's think about few of the classes that we need. Firstly, as its a bank, we can think that there will be a Customer class and a BankAccount class for minimum. Now lets create the Customer class.
+
+``` csharp
+class Customer {
+    string firstName;
+    string lastName;
+    string phoneNumber;
+    string emailAddress;
+
+    public string GetFullName() {
+        return firstName + " " + lastName;
+    }
+}
+```
+
+So now if we analyze the code, we will see that we started with the keyword class and then the name of the class Customer. After that we started the class body by putting curly braces {}. Inside the {}, we placed the variables and methods which are part of the class. According to the above code, firstName, lastName, phoneNumber and emailAddress are local variables to the class and GetFullName is a method which returns a string.
+
+So this is the way, how you can write a class in C#. Its pretty simple.
+
 ## What is an Object
+
+We now know what is a class. Now lets understand what is an object. An object is an instance of a class. What i mean by instance is, an implementation of the class. For example: In our bank application we have a Customer class, but that doesn't mean that we actually have a customer in our application. To create an customer, you have to create an object of the customer.
+
+For example, Mr. Jack Jones is a customer of the bank, so we can say, Mr. Jack Jones is an object of Customer class in programming perspective.
 
 ### How to create Objects
 
+To create and object of a class you have to use a keyword called "new". Lets see an example of an object:
+
+``` csharp
+Customer customer1 = new Customer();
+```
+
+here firstly we have put "Customer", which is the name of the class. And this represents the type of the object. After that we have the name of the object. So here we can see that customer1 is the name of the object which is a Customer class type. After that we have an equals sign (=) and then the keyword "new" and after that agian the class name "Customer" with () next to it. So at the right hand side, by the keyword new, we are telling the compiler that we want to create an object of the type Customer. Why we have put () next to Customer? We will talk about that later in this chapter. Now lets focus on the object creation.
+
+So on the right hand side we are telling the compiler to create an object of type Customer and then using the = sign we are assigning that object to customer1 which is a variable of a Customer type.
+
+This is how we can create an object. Lets create another customer object.
+
+``` csharp
+Customer customer2 = new Customer();
+```
+
+Here we have created another object of the customer class and placed it in a variable named customer2 which is a type of Customer.
+
 ## Variables in CSharp
+
+Now in the above code you have seen, when we created the Customer class, we created few variables. You might be thinking what is this variable thing? Variable is something that varies, means its not constant. And in programming when we create a variable, the computer actually allocates a space in memory for it, so that a value of the variable can be stored there.
+
+Let us assign values to the variables of the objects we created above. Lets first work with customer1 object.
+
+``` csharp
+Customer customer1 = new Customer();
+
+customer1.firstName = "Jack";
+customer1.lastName = "Jones";
+customer1.phoneNumber = "98745632"
+customer1.emailAddress = "jackjones@email.com"
+```
+
+So here we are assigning values to the customer1 object. So in the backend the computer has created space for each variable and kept the values in the momory. So later when ever you access the variable, you will get the value from the memory. Let's see how we can print the firstName.
+
+``` csharp
+Console.WriteLine("First name is " + customer1.firstName);
+```
+
+the output of this code will be
+
+``` shell
+First name is Jack
+```
 
 ## Methods in a Class
 
+Now lets talk about another important topic of classes and objects and that is Method. Method is a kind a like variable, but instead of storing a value, it store a action. Means a method can hold a bunch of code, which will be executed when it is called. Lets see the general form of method
+
+``` csharp
+access-modifier return-type method-name(parameter-list) {
+    // method body
+}
+```
+
+In the general form we can see, that the first thing in the method declaration is an access-modifier. This will set the access permission of the method. Then we have return-type of the method, it should hold the type that the method will return. For example, string, int, double. Then we have the method-name. After the method name we have () which indicates that it is a method. And in the (), we have parameter-list. The parameter list can be empty or can have 1 or more parameters. Then we have {} which holds the method body. The code that the method will execute will go inside {}.
+
+Any code following this structure will be considered as method to the C# compiler.
+
 ### How to create a method
+
+We know what is a mehtod and the general form of it, now lets create a method example.
+
+``` csharp
+public string GetFullName(){
+    return firstName + lastName;
+}
+```
+
+
 
 ### Components of a method
 
