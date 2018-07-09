@@ -184,6 +184,9 @@ public string GetFullName(){
 }
 ```
 
+The above code will create a method name GetFullName. This method doesn't take any parameter from outside as the () is empty. If this method required some parameter it would have been passed inside the paranthesis.
+
+If we see the method body, which is the section between {}. We will see that the code is returning "firstName + lastName", which means, add the two local variables firstName and lastName and return the string.
 
 
 ### Components of a method
