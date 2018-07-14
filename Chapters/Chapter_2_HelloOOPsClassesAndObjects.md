@@ -162,7 +162,7 @@ First name is Jack
 
 ## Methods in a Class
 
-Now lets talk about another important topic of classes and objects and that is Method. Method is a kind a like variable, but instead of storing a value, it store a action. Means a method can hold a bunch of code, which will be executed when it is called. Lets see the general form of method
+Now lets talk about another important topic of classes and objects and that is Method. Method is a kind a like variable, but instead of storing a value, it stores an action. Means a method can hold a bunch of code, which will be executed when it is called. Lets see the general form of method
 
 ``` csharp
 access-modifier return-type method-name(parameter-list) {
@@ -174,24 +174,54 @@ In the general form we can see, that the first thing in the method declaration i
 
 Any code following this structure will be considered as method to the C# compiler.
 
-### How to create a method
+### Disection of a method
 
 We know what is a mehtod and the general form of it, now lets create a method example.
 
 ``` csharp
-public string GetFullName(){
+public string GetFullName(string firstName, string lastName){
     return firstName + lastName;
 }
 ```
 
-The above code will create a method name GetFullName. This method doesn't take any parameter from outside as the () is empty. If this method required some parameter it would have been passed inside the paranthesis.
+The above code will create a method name GetFullName. This method takes two parameters, one is "firstName" another is "lastName", these are placed inside the (). And we can also see that we had to specify the type of those parameters. In this particular example both the parameter types are "string".
 
-If we see the method body, which is the section between {}. We will see that the code is returning "firstName + lastName", which means, add the two local variables firstName and lastName and return the string.
+If we see the method body, which is the section between {}. We will see that the code is returning "firstName + lastName", which means, concat the two parameters firstName and lastName and return the string. As we are planning to return a string from this method, we set the return type of the method to string.
 
-
-### Components of a method
+Another thing to notice is that the access type is set as public for this method, which means that any other class can access this method.
 
 ### Constructor of a class
+
+In every class there is a special type of method. That method is called "Constructor". You can personally create constructor in a class and program it. And if you don't create by yourself the compiler will create a very simple constructor and use it. So if you really don't need a constructor you don't have to create one.
+
+Now lets see what is this constructor and what is its funcationality.
+
+A constructor is a method which gets triggered when an object of a class is created. A constructor is mainly used to set the pre-requisits of the class. For example, if you are creating an object of the class "Human", then that human object must have a date of birth. Withouth date of birth no human can exisits. So you can set this requirement in the constructor. So when ever an object of human class is created the date of birth needs to be given to the object. Yes, you can also program in such a way, if no date of birth is given, set the date of birth as today. But it depends on your applicaions need.
+
+Another example could be, a bank account. When you are creatig a bank account object, you have to provide the bank account holder owner. No bank account can exist witout an owner. So you can set this requirement in constructor.
+
+Now lets see the general form of a constructor.
+
+``` csharp
+access-modifier classs-name(parameter-list) {
+    // constructor body
+}
+```
+
+here we can see a diffirence between a constructor and a normal method and that is, a constructor doesn't have a return type. The reason is a constructor can't return anything. Its for initialization, not for any other type of action. And normally the type of access is "public" for constructors. Because if you don't set the constructor as public, no object can be instantiated. If you specifically want to set up this setting that no object can be instantiated of a class, you can set the constructor as "private". This will block instantiating objects of that class. Lets see an example of a constructor:
+
+``` csharp
+class BankAccount {
+
+    public string owner;
+
+    public BankAccount(){
+        owner = "Some person";
+    }
+}
+```
+
+So in the above example we can see, we have a class called "BankAccount" and it has a variable named "owner". As we know no bank account can exists without an "Owner", we should assign value to owner when an object is created.
 
 ## Pillars of OOP
 
