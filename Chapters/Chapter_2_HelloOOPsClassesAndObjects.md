@@ -221,14 +221,153 @@ class BankAccount {
 }
 ```
 
-So in the above example we can see, we have a class called "BankAccount" and it has a variable named "owner". As we know no bank account can exists without an "Owner", we should assign value to owner when an object is created.
+So in the above example we can see, we have a class called "BankAccount" and it has a variable named "owner". As we know no bank account can exists without an "Owner", we should assign value to owner when an object is created. And to create an constructor we just put public as the access type of the constructor as we want objects to get initiated. We could have asked for the owner value using a parameter.
+
+``` csharp
+class BankAccount {
+
+    public string owner;
+
+    public BankAccount(string theOwner){
+        owner = theOwner;
+    }
+}
+```
+
+If you put parameters in the constructor, then when initializing the object the parameter needs to be passed.
+
+``` csharp
+BankAccount account = new BankAccount("Some Person");
+```
+
+Another interesting this is that, you can have multiple constructors in a class. For example, you can have one constructor that takes one argument, where as another doesn't take any argument. Now depending the way you are initializing the object, the respected constructor will be called. For example:
+
+``` csharp
+class BankAccount {
+
+    public string owner;
+
+    public BankAccount(){
+        owner = "Some person";
+    }
+
+    public BankAccount(string theOwner){
+        owner = theOwner;
+    }
+}
+```
+
+In the above example, we see two constructors for the class BankAccount. Now when you create an object of BankAccount, if you pass the parameter, it will call the second constructor which will set the value and create the object. If you don't pass a parameter while creating the object, the first constructor will be called. Now if you didn't have one of the constructor, that way of object creation won't be available.
+
+Like if you only have the second constructor which has a one parameter, you won't be able to create an object without passing an argument when creating an object.
+
+Like this, you can have multiple constructors created for a class. If you don't create a class what the compailar does is, it creates an empty constructor for that class.
+
+``` csharp
+class BankAccount {
+
+    public string owner;
+
+    public BankAccount(){
+
+    }
+}
+```
 
 ## Pillars of OOP
 
+Object oriented programming is one of the most important programming methodology now a days. The whole concept depends on few ideas. And among those ideas, the top 4 ideas that are essential for the Object Oriented Programming are called "The Pillars of OOP". The 4 pillars are:
+
+1. Inheritance
+2. Encapsulation
+3. Polymorphism
+4. Abstraction
+
 ### Inheritance
+
+The word "Inheritance" means inheriting/receiving/deriving something from another thing. A real life example could be, a son has inherited a house of his father. Means the house was owned by father but now the son owns the house. The son has the same power over the house as the father had. This concept of inheritence is one pillar of OOP.
+
+In programming, when one class is derived from another class, then the its called inheritance. Means the derived class will have all the same properties that the parent class had. In programming terminology, the class from which another classes are derived are called parent class and the classes which are derived called child classes.
+
+Lets see an example:
+
+``` csharp
+public class Fruit {
+    public string Name { get; set; }
+    public string Color { get; set; }
+}
+
+public class Apple : Fruit {
+    public int NumberOfSeeds { get; set; }
+}
+```
+
+So in the above example, we have used inheritance. We have a parent class called Fruit. This class holds the common property that every fruit has. For example: every fruit has name and color. So we can use this fruit class for all the fruits. Now if we create a class for Apple, that Apple class can inherit the Fruit class, right? Because we know an apple is a fruit. And also the properties of the fruit class are also available in Apple. So the Apple class can inherit Fruit class. By applie inheriting fruit class, we don't need to write the same properties in Apple, which fruit class already has, because when Apple class is inheriting fruit class, its actually inheriting all the properties and methods of fruit class.
 
 ### Encapsulation
 
+Encapsulation means encapsulating/hiding/covering. In C# encapsulation is achieved by the access modifiers. The access modifiers that are available in C# are:
+
+1. Public
+2. private
+3. protected
+4. internal
+5. internal protected.
+
+Encapsulation is when you want to control the access to a certain class by other classes. For example, you have a bank account class. For security reason, it won't be good if we keep that class accessible by all the classes. May be its better to make Private or any other access specifiers.
+
+This is not only applicable over a class, but you can limit the access over a method or variable in a class. For example, you might need to keep the BankAccount class public, for some reason, but you can make the AccountBalance property private so that no other class can access to this property except the BankAccount class.
+
+``` csharp
+public class BankAccount {
+    private double AccountBalance { get; set; }
+}
+
+```
+
+Like variables and properties you can also use access specifiers to methods. You may write private methods which are not needed by other classes or you don't want to expose to other classes.
+
+``` csharp
+public class BankAccount{
+    private double AccountBalance { get; set; }
+    private double TaxRate { get; set; }
+
+    public double GetAccountBalance() {
+        double balanceAfterTax = GetBalanceAfterTax();
+        return balanceAfterTax;
+    }
+
+    private double GetBalanceAfterTax(){
+        return AccountBalance * TaxRate;
+    }
+}
+```
+
+In the above example, the method GetBalanceAfterTax is a method which will not be needed by other classes as in this particular example we only want to provide AccountBalance after tax. So we can make this method private.
+
+Encapsulation is a very important part of OOP. It gives a nice control of the code.
+
 ### Polymorphism
+
+The word polymorphism means many forms. To understand the concept properly, lets work with an example. Let's think about a person, for example bill gates. We all know bill gates is a great software developer, a businessman, a social worker, a great father, a great husband and also a great human being. One individual but different roles and different tasks. This is polymorphism. When bill gates was developing the software, he was playing a role of a software developer. He was thinking about the code he was writing. Later when he became the CEO of Microsoft, he started managing people and doing business. Its the same Bill Gates, but different role, different responsibilities. One person playing different role in different circumstances can be said as polymorphism.
+
+In C# there are two kinds of polymorphism. Static Polymorphism and Dynamic polymorphism. Static polymorphism is when the method role is determined in compile time and Dynamic is when the method role is determined in run time.
+
+Method overloading and Operator overloading are static polymorphism examples. Lets see an example of Function overloading
+
+``` csharp
+public class Calculator {
+
+    public int AddNumbers(int firstNum, int secondNum){
+        return firstNum + secondNum;
+    }
+
+    public double AddNumbers(double firstNum, double secondNum){
+        return firstNum + secondNum;
+    }
+}
+```
+
+Here we can see we have two methods with the same name AddNumbers. Normally its not allowed to have the same name for a method if the signature is not different. As the parameters are different its allowed by the compiler.
 
 ### Abstraction
