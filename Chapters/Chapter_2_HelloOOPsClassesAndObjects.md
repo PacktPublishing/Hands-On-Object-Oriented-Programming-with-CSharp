@@ -347,13 +347,46 @@ In the above example, the method GetBalanceAfterTax is a method which will not b
 
 Encapsulation is a very important part of OOP. It gives a nice control of the code.
 
+### Abstraction
+
+Abstraction means something which doesn't has an instance in reality but is present as an idea or concept. In programming we use this technique to organize our thoughts. And this is one of the pillar of Object Oriented Programming. In C# we have abstract classes, which implements this concept of Abstraction. Abstract classes are classes which can't have any instance, the classes which implements the abstract class will implement the properties and methods of that abstract class. Lets see an example of Abstract class:
+
+``` csharp
+public abstract class Vehicle {
+    public abstract int GetNumberOfTyres();
+}
+
+public class Bicycle : Vehicle {
+    public string Company { get; set; }
+    public string Model { get; set; }
+    public int NumberOfTyres { get; set; }
+
+    public override int GetNumberOfTyres() {
+        return NumberOfTyres;
+    }
+}
+
+public class Car : Vehicle {
+    public string Company { get; set; }
+    public string Model { get; set; }
+    public int FrontTyres { get; set; }
+    public int BackTyres { get; set; }
+
+    public override int GetNumberOfTyres() {
+        return FrontTyres + BackTyres;
+    }
+}
+```
+
+In the above example, we have an abstract class called Vehicle. It has one abstract method GetNumberOfTyres(). As its abstract method, this has to overridden by the classes which implements the abstract class. Our class Bicycle and Car implements Vehicle abstract class, so they also overrides the abstract method GetNumberOfTyres(). And if we see the implementation of those methods in those 2 classes, we will see that the implementation is different, and that is the implementation of Abstraction..
+
 ### Polymorphism
 
 The word polymorphism means many forms. To understand the concept properly, lets work with an example. Let's think about a person, for example bill gates. We all know bill gates is a great software developer, a businessman, a social worker, a great father, a great husband and also a great human being. One individual but different roles and different tasks. This is polymorphism. When bill gates was developing the software, he was playing a role of a software developer. He was thinking about the code he was writing. Later when he became the CEO of Microsoft, he started managing people and doing business. Its the same Bill Gates, but different role, different responsibilities. One person playing different role in different circumstances can be said as polymorphism.
 
-In C# there are two kinds of polymorphism. Static Polymorphism and Dynamic polymorphism. Static polymorphism is when the method role is determined in compile time and Dynamic is when the method role is determined in run time.
+In C# there are two kinds of polymorphism. Static Polymorphism and Dynamic polymorphism. Static polymorphism is when the role of a method is determined in compile time and Dynamic is when the role of a method is determined in run time.
 
-Method overloading and Operator overloading are static polymorphism examples. Lets see an example of Function overloading
+Method overloading and Operator overloading are static polymorphism examples. Lets see an example of Method overloading
 
 ``` csharp
 public class Calculator {
@@ -368,6 +401,6 @@ public class Calculator {
 }
 ```
 
-Here we can see we have two methods with the same name AddNumbers. Normally its not allowed to have the same name for a method if the signature is not different. As the parameters are different its allowed by the compiler.
+Here we can see we have two methods with the same name AddNumbers. Normally its not allowed to have the same name for a method if the signature is not different. As the parameters are different its allowed by the compiler. And writing a method with same name as another but with different parameters is called method overloading. Its a kind of Polymorphism.
 
-### Abstraction
+Dynamic polymorphism is the use of Abstract class. When you write an abstract class, no instance can be created from that abstract class. When any other class uses or implements that abstract class, the class also has to implement the abstract methods of that abstract class. And as different classes can implement the abstract class and can have different implementation of the abstract methods, a polymorphic behavior is achieved. Same named methods but different implementation.
