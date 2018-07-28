@@ -1,0 +1,67 @@
+# Introduction
+
+As we have discussed in earlier chapter, Object oriented programming is about objects. Objects are in the center of this programming methodology. We we design our software keeping OOP in mind, we think everything as objects and try to make relation between those objects in a proper way so that all these objects can ultimately give us our desired output. This relationship between objects are called "Object Collaboration".
+
+Object collaboration is definitely one of the most important topics of oop. If the objects doesn't collaborate with each other in a program, nothing can be achieved. For example, if we think about a web application. A web application mainly has 3 parts, UI, logic and data access layer which talks with database. Every layer has their own objects which are specialy designed to serve a purpose. There could be objects related to UI, there will be objects for the logical layers and may be some objects which will talk with database. Now anyhow every object has to collaborate with another object to maintain the flow. It will be very very rare where an object will not have any type of collaboration with each other.
+
+# Types of collaboration
+
+There are many ways an object can collaborate with another object. But here in this chapter we will talk about the basic 2 collaborate rules. We will look examples, to understand the concept properly. So the 2 basic collaborate rules are:
+
+1. Collaboration
+2. Aggregation
+3. Inheritance
+
+Now before we jump into details about these types. Let's first see a case study. After when we will be discussing about the types, we will try to use the case study so that we can real the types with real examples.
+
+## Case Study
+
+Let's think that we are going to develop a Restaurant Management Software. Definitely we are only going to focus on object collaboration and not about the application design in this chapter. So lets see what objects we will be needing for a simple Restaurant Management System software? We will be surly needing an object of Food, an object of Chef, an object of Waiter and an object or Beverage. Now let's lets try to list other objects including these so that we can related them easily.
+
+The objects we need:
+
+* Food
+* Beef Burger
+* Pasta
+* Beverage
+* Cola
+* Coffee
+* Staff
+* Chef
+* Waiter
+* FoodRepository
+* BeverageRepository
+* StaffRepository
+
+The Repository objects will be talking with database to store and retrieve related information. For example, the FoodRepository will be used to save and retreive objects of Food and Beverage. We have more specific food objects like Beef Burger and Pasta. Here these objects are sub category of the Food object. Now as a software developer, we have identified the objects that are needed to develop this software. Now its time to use these objects in such a way so that it solves the problem that the software will be used for. But before we start writing code, we need to understand or figure out how the objects will relate to each other. Lets start with the 1st type of object collboration rule "Collaboration".
+
+## Collaboration
+
+When one object uses another unrelated object to do some task, the relationship between them is called collaboration. In software world we also refer this relation as "use a" relation. Lets see if we have any colllaboration relation in our objcts. If we analyze our FoodRepository object will be saving and retrieveing Food and Beverage objects form database. It means the FoodRepository ojbect has to use the "Food" object. From the frontend when a new Food object will be creted, that object will be passed to FoodRepository. The FoodRepository will then serialize the Food object to database data to save it in the database. If the FoodRepository doesn't use the Food object then how would it know what to serialize and sotre in dataabase? So htere the FoodRepository must use the collaboration relation with Food. Lets see code of it:
+
+```csharp
+public class Food {
+    public int? FoodId {get;set;}
+    public string Name { get;set;}
+    public decimal Price {get;set;}
+}
+
+public class FoodRepository {
+    public int SaveFood(Food food){
+        int result = SaveFoodInDatabase(food);
+        return result;
+    }
+
+    public Food GetFood(int foodId){
+        Food result = new Food();
+        result = GetFoodFromDatabaseById(foodId);
+        return result;
+    }
+}
+```
+
+In the above code we can see that FoodRepository class has 2 methods. One is SaveFood and another is GetFood. SaveFood is taking one object of Food and saving it in database. And returing the newly created FoodId. On the other method GetFood, the id of a Food is passed. The method searches the food in database and maps it back to a Food object. Then the food object is returned.
+
+So here we can see that FoodRepository object needs to use the Food object to do its work. And this type of relationship is caleed Collaboration relationship. We can also use the "use a" phrase to indentify these relaitonship. The FoodRepository uses a Food to save food in database.
+
+Like food, the foodRepository also uses a Beverage object to save and retrieve beverage in database.
