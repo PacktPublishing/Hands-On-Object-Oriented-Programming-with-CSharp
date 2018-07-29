@@ -26,6 +26,8 @@ The objects we need:
 * Beverage
 * Cola
 * Coffee
+* Order
+* OrderItem
 * Staff
 * Chef
 * Waiter
@@ -123,7 +125,7 @@ One object can be realted with multiple objects using collabortive relationship.
 
 ## Aggregation
 
-Another type of relationship the objects have between them is Aggregation. Aggregation type of relationship is also called "has a" relationship. When one object has another object in it as a property, it is the "has a" relationship means Aggregation relationship. For example in our case study, we have Food object. We all know, no food can exists without a chef. Someone has to cook, bake, prepare it. So we can say a food has a chef. It means, the food object will have a property chef, which will hold the chef of that food. Let's see the code:
+Another type of relationship the objects have between them is Aggregation. Aggregation type of relationship is also called "has a" relationship. When one object has another object in it as a property, it is the "has a" relationship means Aggregation relationship. For example in our case study, we have Food object. We all know, no food can exists without a chef. Someone has to cook, bake, prepare it. So we can say a food has a chef. It means, the food object will have a property named "Chef", which will hold the chef of that food. Let's see the code:
 
 ``` csharp
 public class Food {
@@ -134,7 +136,7 @@ public class Food {
 }
 ```
 
-If we also think about Beverage, every beverage must have a company or maker. For example if we think about the commercial beverages, those are made by companies like "Pepsi Co.", "Coka Cola Company". The beverage can also be local made, in that case the company name would be the name of the local shop. But the main idea here is that, a beverage must have a Manufacturar Company. So let's see this is code:
+If we also think about Beverage, every beverage must have a company or maker. For example if we think about the commercial beverages, those are made by companies like "Pepsi Co.", "Coka Cola Company". The beverage can also be local made, in that case the company name would be the name of the local shop. But the main idea here is that, a beverage must have a Manufacturer Company. So let's see this is code:
 
 ```csharp
 public class Beverage {
@@ -145,3 +147,23 @@ public class Beverage {
 }
 ```
 
+In both of the above objects "Chef" and "Manufacturer" are objects and are used as property of "Food" and "Beverage" objects. This relationship is called aggregation. There is a special type of aggregation relationship, named "Composition".
+
+### Composition
+
+If we think about the Chef and Manufacturer classes, the existance of these classes are not depending on "Food" and "Beverage" classes fully. These classes can exists indenpendently by themselves. But when there is a case that an object can't exist without another object, that relationship is called Composition relationship. Let's see an example:
+
+```csharp
+public class Order {
+    public int OrderId { get; set; }
+    public List<OrderItem> OrderItems { get; set; }
+    public DateTime OrderTime { get; set; }
+    public Customer Customer { get; set; }
+}
+```
+
+Here if we analyze the above class, we will see that Order class has Customer class and List of OrderItems as a property and these are related in aggregate way. Between these two Customer object can be an independet object, but OrderItem is not. OrderItem can't be independent. OrderItem has to be a part of Order. If an OrderItem is not a part of Order, its untrackable, its unusable. So, we can say OrderItem has a composition relationship with Order object.
+
+### Inheritance
+
+This is one of the 4 pillars of OOP. Inheritance is when one object inherits or reuses another objects properties or methods. The class that gets inherited is called base class and the class that inherits the base class is normally called derived class. 
