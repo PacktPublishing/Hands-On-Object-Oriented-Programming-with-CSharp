@@ -4,7 +4,7 @@ As we have discussed in earlier chapter, Object oriented programming is about ob
 
 Object collaboration is definitely one of the most important topics of oop. If the objects doesn't collaborate with each other in a program, nothing can be achieved. For example, if we think about a web application. A web application mainly has 3 parts, UI, logic and data access layer which talks with database. Every layer has their own objects which are specialy designed to serve a purpose. There could be objects related to UI, there will be objects for the logical layers and may be some objects which will talk with database. Now anyhow every object has to collaborate with another object to maintain the flow. It will be very very rare where an object will not have any type of collaboration with each other.
 
-# Types of collaboration
+## Different types of Object Collaboration in CSharp
 
 There are many ways an object can collaborate with another object. But here in this chapter we will talk about the basic 2 collaborate rules. We will look examples, to understand the concept properly. So the 2 basic collaborate rules are:
 
@@ -14,7 +14,7 @@ There are many ways an object can collaborate with another object. But here in t
 
 Now before we jump into details about these types. Let's first see a case study. After when we will be discussing about the types, we will try to use the case study so that we can real the types with real examples.
 
-## Case Study
+### Case Study
 
 Let's think that we are going to develop a Restaurant Management Software. Definitely we are only going to focus on object collaboration and not about the application design in this chapter. So lets see what objects we will be needing for a simple Restaurant Management System software? We will be surly needing an object of Food, an object of Chef, an object of Waiter and an object or Beverage. Now let's lets try to list other objects including these so that we can related them easily.
 
@@ -62,6 +62,86 @@ public class FoodRepository {
 
 In the above code we can see that FoodRepository class has 2 methods. One is SaveFood and another is GetFood. SaveFood is taking one object of Food and saving it in database. And returing the newly created FoodId. On the other method GetFood, the id of a Food is passed. The method searches the food in database and maps it back to a Food object. Then the food object is returned.
 
-So here we can see that FoodRepository object needs to use the Food object to do its work. And this type of relationship is caleed Collaboration relationship. We can also use the "use a" phrase to indentify these relaitonship. The FoodRepository uses a Food to save food in database.
+So here we can see that FoodRepository object needs to use the Food object to do its work. And this type of relationship is caleed Collaboration relationship. We can also use the "use a" phrase to indentify these relaitonship. The FoodRepository uses a Food object to save food in database.
 
-Like food, the foodRepository also uses a Beverage object to save and retrieve beverage in database.
+Like food, the foodRepository also uses a Beverage object to save and retrieve beverage in database. Let's see the code:
+
+``` csharp
+public class Beverage {
+    public int? BeverageId {get;set;}
+    public string Name { get;set;}
+    public decimal Price {get;set;}
+}
+
+public class FoodRepository {
+    public int SaveBeverage(Beverage beverage){
+        int result = SaveBeverageInDatabase(beverage);
+        return result;
+    }
+
+    public Food GetBeverage(int beverageId){
+        Beverage result = new Beverage();
+        result = GetBeverageFromDatabaseById(beverageId);
+        return result;
+    }
+}
+```
+
+If you see the above code, we will see that the FoodRepository has two methods one is SaveBeverage and another is GetBeverage. Both of these methods uses Beverage object. It means the FoodRepository has a collaborative relationship with Beverage object.
+
+Now lets see the whole FoodRepository class:
+
+```csharp
+public class FoodRepository {
+    public int SaveFood(Food food){
+        int result = SaveFoodInDatabase(food);
+        return result;
+    }
+
+    public Food GetFood(int foodId){
+        Food result = new Food();
+        result = GetFoodFromDatabaseById(foodId);
+        return result;
+    }
+
+    public int SaveBeverage(Beverage beverage){
+        int result = SaveBeverageInDatabase(beverage);
+        return result;
+    }
+
+    public Food GetBeverage(int beverageId){
+        Beverage result = new Beverage();
+        result = GetBeverageFromDatabaseById(beverageId);
+        return result;
+    }
+}
+```
+
+One object can be realted with multiple objects using collabortive relationship. In OOP this type of relationship is very common.
+
+### Why we need Collaboration relationship
+
+## Aggregation
+
+Another type of relationship the objects have between them is Aggregation. Aggregation type of relationship is also called "has a" relationship. When one object has another object in it as a property, it is the "has a" relationship means Aggregation relationship. For example in our case study, we have Food object. We all know, no food can exists without a chef. Someone has to cook, bake, prepare it. So we can say a food has a chef. It means, the food object will have a property chef, which will hold the chef of that food. Let's see the code:
+
+``` csharp
+public class Food {
+    public int? FoodId {get;set;}
+    public string Name { get; set; }
+    public string Price { get; set; }
+    public Chef Chef { get; set; }
+}
+```
+
+If we also think about Beverage, every beverage must have a company or maker. For example if we think about the commercial beverages, those are made by companies like "Pepsi Co.", "Coka Cola Company". The beverage can also be local made, in that case the company name would be the name of the local shop. But the main idea here is that, a beverage must have a Manufacturar Company. So let's see this is code:
+
+```csharp
+public class Beverage {
+    public int? FoodId {get;set;}
+    public string Name { get; set; }
+    public string Price { get; set; }
+    public Manufacturer Manufacturer { get; set; }
+}
+```
+
