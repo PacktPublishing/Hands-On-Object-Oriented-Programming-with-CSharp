@@ -29,16 +29,13 @@ by [Raihan Taher](http://www.raihantaher.com)
 [FirstDraft(7/10/2018)]
 3. Inheritance and Class hierarchies [40 pages]
 
-### Description
--------------
+#### Description
 In this chapter, we will understand the various attributes of C# classes and class hierarchies. The chapter will guide the user with C# class structures by demonstrating various concepts of OOPS.
 
-### Level
---------------
+#### Level
 BASIC
 
-### Topics covered
----------------
+#### Topics covered
 Understanding Classes and objects
 Object construction and destruction
 Inheritance
@@ -50,15 +47,14 @@ Pattern matching in Switch Case block
 Fundamentals of object hierarchies
 Abstract classes and Interfaces
 
-### Skills learned
----------------
+#### Skills learned
 C# basics by understanding various language constructs
 Can implement all oops characteristics through C#
 Can define contracts through interfaces
 
 [Raihan]
 [FirstDraft(5/10/2018)]
-4. Object collaboration [30 pages]
+1. Object collaboration [30 pages]
 
 [Raihan]
 [Done(FirstDraft)]
