@@ -1,63 +1,41 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chapter6
+namespace EventsAndDelegates
 {
-    public delegate void GetResult();
+    public delegate int DoSomething(B b);
 
-    public class ResultPublishEvent
+    public class A
     {
-        public event GetResult PublishResult;
-
-        public void PublishResultNow()
-        {
-            if (PublishResult != null)
-            {
-                Console.WriteLine("");
-                Console.WriteLine("We are publishing the results now!");
-                Console.WriteLine("");
-                PublishResult();
-            }
-        }
+        public int value = 5;
     }
 
-    public class EmailEventHandler
-    {
-        public void SendEmail()
-        {
-            Console.WriteLine("Results have been emailed successfully!");
-        }
-    }
+    public class B : A { }
 
-    public class SmsEventHandler
-    {
-        public void SmsSender()
-        {
-            Console.WriteLine("Results have been messaged successfully!");
-        }
-    }
 
-    public class Code_6_8
+    public class Program
     {
+        public static int WorkA(A a)
+        {
+            Console.WriteLine("Method WorkA called: ");
+            return a.value * 5;
+        }
+
+        public static int WorkB(B b)
+        {
+            Console.WriteLine("Method WorkB called: ");
+            return b.value * 10;
+        }
+
+
         public static void Main(string[] args)
         {
-            ResultPublishEvent e = new ResultPublishEvent();
+            B someB = new B();
 
-            //Handlers
-            EmailEventHandler email = new EmailEventHandler();
-            SmsEventHandler sms = new SmsEventHandler();
+            DoSomething something = WorkA;
 
-            e.PublishResult += email.SendEmail;
-            e.PublishResult += sms.SmsSender;
+            int result = something(someB);
 
-            e.PublishResultNow();
-
-            e.PublishResult -= sms.SmsSender;
-
-            e.PublishResultNow();
+            Console.WriteLine("The value is " + result);
 
             Console.ReadLine();
         }

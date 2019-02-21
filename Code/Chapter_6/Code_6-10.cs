@@ -14,9 +14,9 @@ namespace Chapter6
 
         public void PublishResultNow()
         {
-
             if (PublishResult != null)
             {
+                Console.WriteLine("");
                 Console.WriteLine("We are publishing the results now!");
                 Console.WriteLine("");
                 PublishResult();
@@ -32,7 +32,15 @@ namespace Chapter6
         }
     }
 
-    public class Code_6_7
+    public class SmsEventHandler
+    {
+        public void SmsSender()
+        {
+            Console.WriteLine("Results have been messaged successfully!");
+        }
+    }
+
+    public class Code_6_8
     {
         public static void Main(string[] args)
         {
@@ -40,8 +48,14 @@ namespace Chapter6
 
             //Handlers
             EmailEventHandler email = new EmailEventHandler();
+            SmsEventHandler sms = new SmsEventHandler();
 
             e.PublishResult += email.SendEmail;
+            e.PublishResult += sms.SmsSender;
+
+            e.PublishResultNow();
+
+            e.PublishResult -= sms.SmsSender;
 
             e.PublishResultNow();
 

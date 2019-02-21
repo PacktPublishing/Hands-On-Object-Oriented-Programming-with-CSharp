@@ -1,49 +1,42 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chapter6
+namespace EventsAndDelegates
 {
-    public delegate void GetResult();
+    public delegate A DoSomething();
 
-    public class ResultPublishEvent
+    public class A
     {
-        public event GetResult PublishResult;
-
-        public void PublishResultNow()
-        {
-
-            if (PublishResult != null)
-            {
-                Console.WriteLine("We are publishing the results now!");
-                Console.WriteLine("");
-                PublishResult();
-            }
-        }
+        public int value { get; set; }
     }
 
-    public class EmailEventHandler
-    {
-        public void SendEmail()
-        {
-            Console.WriteLine("Results have been emailed successfully!");
-        }
-    }
+    public class B : A { }
 
-    public class Code_6_7
+
+    public class Program
     {
+        public static A WorkA()
+        {
+            A a = new A();
+            a.value = 1;
+            return a;
+        }
+
+        public static B WorkB()
+        {
+            B b = new B();
+            b.value = 2;
+            return b;
+        }
+
         public static void Main(string[] args)
         {
-            ResultPublishEvent e = new ResultPublishEvent();
+            A someA = new A();
 
-            //Handlers
-            EmailEventHandler email = new EmailEventHandler();
+            DoSomething something = WorkB;
 
-            e.PublishResult += email.SendEmail;
+            someA = something();
 
-            e.PublishResultNow();
+            Console.WriteLine("The value is " + someA.value);
 
             Console.ReadLine();
         }
