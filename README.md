@@ -45,7 +45,7 @@ class Customer
 **Following is what you need for this book:**
 This book is designed for people who are new to object-oriented programming. Basic C# skills are assumed, however, prior knowledge of OOP in any other language is not required.
 
-With the following software and hardware list you can run all code files present in the book (Chapter 1-).
+With the following software and hardware list you can run all code files present in the book (Chapter 1-14).
 ### Software and Hardware List
 | Chapter | Software required | OS required |
 | -------- | ------------------------------------ | ----------------------------------- |
