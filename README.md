@@ -1,4 +1,4 @@
-# Object Oriented Programming with C# 7
+# Hands-On Object-Oriented Programming with C##
 
 <a href="https://www.packtpub.com/application-development/object-oriented-programming-c-7?utm_source=github&utm_medium=repository&utm_campaign=9781788296229 "><img src="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B07306_MockupCover.png" alt="Object Oriented Programming with C# 7" height="256px" align="right"></a>
 
