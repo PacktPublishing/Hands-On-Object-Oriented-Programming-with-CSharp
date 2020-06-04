@@ -55,7 +55,7 @@ With the following software and hardware list you can run all code files present
 | 13 | Git | Windows, Mac OS X, and Linux (Any) |
 
 ## Errata
-### The content on page should be read as: Managed code
+### The content on page 9 should be read as: Managed code
 The phrase managed code came into being after Microsoft declared the .NET framework. Any code running in a managed environment is handled by Common Language Runtime (CLR), which keeps Common Language Runtime (CLR) track of memory allocation and automatically deallocates it when not in use. The general usage of the term managed code means that the environment where the code executes is aided by a garbage collector, memory management, type-safety, and so on. .NET introduced the C# language in the managed environment, and remains managed to date.
 
 
