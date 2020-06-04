@@ -54,6 +54,11 @@ With the following software and hardware list you can run all code files present
 | 11 | Visual Studio 2019 Preview, .NET Core v2.1 or higher, Sdcb.System.Range (Nuget Package) | Windows, Mac OS X, and Linux (Any) |
 | 13 | Git | Windows, Mac OS X, and Linux (Any) |
 
+## Errata
+### The content on page should be read as: Managed code
+The phrase managed code came into being after Microsoft declared the .NET framework. Any code running in a managed environment is handled by Common Language Runtime (CLR), which keeps Common Language Runtime (CLR) track of memory allocation and automatically deallocates it when not in use. The general usage of the term managed code means that the environment where the code executes is aided by a garbage collector, memory management, type-safety, and so on. .NET introduced the C# language in the managed environment, and remains managed to date.
+
+
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781788296229_ColorImages.pdf).
 
 ### Related products
