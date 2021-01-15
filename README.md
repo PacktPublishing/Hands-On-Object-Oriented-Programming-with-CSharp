@@ -1,8 +1,3 @@
-## $5 Tech Unlocked 2021!
-[Buy and download this product for only $5 on PacktPub.com](https://www.packtpub.com/)
------
-*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
-
 # Hands-On Object-Oriented Programming with C#
 
 <a href="https://www.packtpub.com/application-development/object-oriented-programming-c-7?utm_source=github&utm_medium=repository&utm_campaign=9781788296229 "><img src="https://www.packtpub.com/sites/default/files/B07306.png" alt="Hands-On Object-Oriented Programming with C#" height="256px" align="right"></a>
